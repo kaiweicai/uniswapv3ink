@@ -2,7 +2,7 @@
 
 use std::ops::Sub;
 
-use primitives::{Int24, Uint160, U160, U256, I256};
+use primitives::{Int24, Uint160, U160, U256, int256, uint256};
 
 use crate::{cal_ratio, assembly::{gt, or}};
 
@@ -86,8 +86,12 @@ fn getTickAtSqrtRatio(sqrt_price_x96:U160)->Int24{
         r = ratio << (U256::from_dec_str("127").unwrap()-msb);
     }
 
-    
+    let log_2:int256;
+    let b:uint256 = uint256::default();
+    log_2 = b.to_int256().unwrap();
     // int256 log_2 = (int256(msb) - 128) << 64;
+
+
     // assembly {
     //     r := shr(127, mul(r, r))
     //     let f := shr(128, r)

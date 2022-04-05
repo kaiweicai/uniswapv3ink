@@ -22,7 +22,10 @@ primitives = {version = "3.0.0-rc9",path="../primitives/", default-features = fa
 default-features = false
 git = 'https://github.com/paritytech/substrate.git'
 version = '6.0.0'
-
+[dependencies.liquid_primitives]
+default-features = false
+git = 'https://github.com/WeBankBlockchain/liquid.git'
+tag = 'v1.0.0-rc2'
 [lib]
 name = "libs"
 # path = "lib.rs"
@@ -44,5 +47,6 @@ std = [
     "sp-core/std",
     "primitives/std",
     "hex/std",
+    "liquid_primitives/std",
 ]
 ink-as-dependency = []

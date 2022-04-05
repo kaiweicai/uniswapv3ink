@@ -1,5 +1,6 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 pub mod assembly;
+pub mod liquid_assembly;
 
 use primitives::U256;
 

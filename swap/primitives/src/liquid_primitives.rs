@@ -1,7 +1,5 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
-// pub mod liquid_primitives;
-
 use ink_env::AccountId;
 // SPDX-License-Identifier: GPL-2.0-or-later
 
@@ -10,14 +8,13 @@ use ink_metadata::layout::{StructLayout, Layout, FieldLayout};
 use ink_storage::{
     traits::{PackedLayout, SpreadLayout, StorageLayout, SpreadAllocate,ExtKeyPtr},
 };
-use liquid_primitives::types::{i256, u256};
-// use primitive_types::U256;
+use liquid_primitives::types::u256;
+// use primitive_types::u256;
 use scale::{Decode, Encode};
 
 
 #[cfg(feature = "std")]
 use scale_info::{TypeInfo, Type};
-pub use sp_core::U256;
 pub type Address = AccountId;
 pub type Uint24 = u32;
 pub type Uint16 = u16;
@@ -25,30 +22,28 @@ pub type Int24 = i32;
 pub type Uint8 = u8;
 pub type Uint160 = WrapperU256;
 pub type Uint256 = WrapperU256;
-pub type U160 = U256;
+pub type U160 = u256;
 pub type I56 = i64;
-pub type int256 = i256;
-pub type uint256 = u256;
 
 pub const ADDRESS0:[u8;32] = [0u8;32];
 
 #[derive(Default,Debug,Clone, PartialEq, Eq,Encode, Decode)]
 // #[cfg_attr(feature = "std", derive(TypeInfo))]
 pub struct WrapperU256 {
-    pub value: U256,
+    pub value: u256,
 }
 
 impl WrapperU256{
-    pub fn new(v:[u64;4])->Self{
+    pub fn new(v:&[u8])->Self{
         WrapperU256{
-            value:U256(v),
+            value:u256::from_be_bytes(v),
         }
     }
 }
 
-impl AsRef<U256> for WrapperU256 {
+impl AsRef<u256> for WrapperU256 {
     #[inline]
-    fn as_ref(&self) ->  &U256{
+    fn as_ref(&self) ->  &u256{
       &self.value
     }
 }
@@ -81,12 +76,12 @@ impl SpreadLayout for WrapperU256 {
     const FOOTPRINT: u64 = 4;
     const REQUIRES_DEEP_CLEAN_UP: bool = true;
     fn pull_spread(ptr: &mut ink_primitives::KeyPtr) -> Self {
-        let slice: [u64; 4] = SpreadLayout::pull_spread(ptr);
-        Self { value: U256(slice) }
+        let slice: [u8; 64] = SpreadLayout::pull_spread(ptr);
+        Self { value: u256::from_be_bytes(&slice) }
     }
 
     fn push_spread(&self, ptr: &mut ink_primitives::KeyPtr) {
-        SpreadLayout::push_spread(&self.value.0, ptr);
+        SpreadLayout::push_spread(&self.value.0.data, ptr);
     }
 
     fn clear_spread(&self, ptr: &mut ink_primitives::KeyPtr) {
