@@ -23,6 +23,7 @@ pub type Uint8 = u8;
 pub type Uint160 = WrapperU256;
 pub type Uint256 = WrapperU256;
 pub type U160 = u256;
+pub type U256 = u256;
 pub type I56 = i64;
 
 pub const ADDRESS0:[u8;32] = [0u8;32];

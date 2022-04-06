@@ -2,7 +2,8 @@
 
 use primitives::U256;
 
-use super::{gt, shl, or, shr, mul};
+use super::parity_assembly::{shl, gt, or, shr, mul};
+
 
 pub fn cal_ratio(msb:&U256,r:&U256,o:&U256,v:&'static str)->(U256,U256){
     // let f := shl(7, gt(r, 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF))
@@ -30,6 +31,7 @@ pub fn cal_log(r:&U256,log_2:&U256,w:&U256)->(U256,U256){
 
 #[cfg(test)]
 mod tests {
+    use liquid_primitives::types::i256;
     use primitives::U256;
 
     use super::cal_ratio;
@@ -56,5 +58,10 @@ mod tests {
     fn it_work(){
         let result = U256::from_dec_str("1461446703485210103287273052203988822378723970342");
         println!("result is:{:?}",result);
+        let a:i256=i256::from(-15i32);
+        let s = a.to_str_radix(10);
+        println!("s is:{:?}",s);
+        let b= i32::from_str_radix(s.as_str(), 10).unwrap();
+        println!("b is:{:?}",b);
     }
 }

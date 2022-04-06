@@ -21,7 +21,10 @@ scale-info = { version = "2", default-features = false, features = ["derive"], o
 primitives = {version = "3.0.0-rc9",path="../../../primitives/", default-features = false}
 libs = {version = "3.0.0",path="../../../libs/", default-features = false}
 crabswap = { path = "../../../", default-features = false}
-
+# [dependencies.liquid_primitives]
+# default-features = false
+# git = 'https://github.com/WeBankBlockchain/liquid.git'
+# tag = 'v1.0.0-rc2'
 
 [lib]
 name = "pool"
@@ -44,6 +47,7 @@ std = [
     "libs/std",
     "brush/std",
     "crabswap/std",
+    # "liquid_primitives/std",
 ]
 ink-as-dependency = []
 # [profile.dev]
