@@ -24,7 +24,7 @@ crabswap = { path = "../../../", default-features = false}
 # [dependencies.liquid_primitives]
 # default-features = false
 # git = 'https://github.com/WeBankBlockchain/liquid.git'
-# tag = 'v1.0.0-rc2'
+# tag = 'v1.0.0-rc3'
 
 [lib]
 name = "pool"

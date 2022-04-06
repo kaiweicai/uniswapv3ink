@@ -24,8 +24,8 @@ git = 'https://github.com/paritytech/substrate.git'
 version = '6.0.0'
 [dependencies.liquid_primitives]
 default-features = false
-git = 'https://github.com/WeBankBlockchain/liquid.git'
-tag = 'v1.0.0-rc2'
+git = 'https://github.com/kaiweicai/liquid.git'
+tag = 'v1.0.0-rc3'
 [lib]
 name = "libs"
 # path = "lib.rs"
